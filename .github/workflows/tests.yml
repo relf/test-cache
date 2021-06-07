@@ -18,8 +18,8 @@ jobs:
         id: cache-thrift
         uses: actions/cache@v2
         with:
-          path: ${PWD}/install/bin
-          key: ${{ runner.os }}-thrift-0.13.0-cache-v3
+          path: install/bin
+          key: ${{ runner.os }}-thrift-0.13.0-cache-v4
 
       - name: Make Thrift Compiler
         if: steps.cache-thrift.outputs.cache-hit != 'true'
@@ -31,24 +31,23 @@ jobs:
           mkdir -p thrift
           mkdir -p install
           tar zxf thrift.tar.gz -C ${PWD}/thrift --strip-components=1
-          pushd ${PWD}/thrift
+          cd thrift
           ./configure --prefix=${PWD}/../install --without-c_glib --without-csharp --without-python --without-netstd --without-erlang --without-rs --without-swift --without-dotnetcore --without-cpp --without-ruby --without-nodejs --without-py3 --without-go --without-php --without-java
           make
           make install
-          popd
-          ls -al ${PWD}/install/*
+          cd ..
+          ls -al install/*
 
       - name: Check Thrift install
         run: |
           echo $PWD
-          ls -al ${PWD}/
-          ls -al ${PWD}/install/*
+          ls -al .
+          ls -al install/*
           echo "${PWD}/install/bin" >> $GITHUB_PATH
 
       - name: Run tests
         run: |
           echo $PATH
-          ls -al ${PWD}/install/*
           thrift --gen py calculator.thrift
 
 
