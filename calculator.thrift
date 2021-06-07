@@ -2,7 +2,7 @@
  * Ahh, now onto the cool part, defining a service. Services just need a name
  * and can optionally inherit from another service using the extends keyword.
  */
-service Calculator extends shared.SharedService {
+service Calculator {
 
   /**
    * A method definition looks like C code. It has a return type, arguments,
@@ -11,17 +11,5 @@ service Calculator extends shared.SharedService {
    * field lists in struct or exception definitions.
    */
 
-   void ping(),
-
-   i32 add(1:i32 num1, 2:i32 num2),
-
-   i32 calculate(1:i32 logid, 2:Work w) throws (1:InvalidOperation ouch),
-
-   /**
-    * This method has a oneway modifier. That means the client only makes
-    * a request and does not listen for any response at all. Oneway methods
-    * must be void.
-    */
-   oneway void zip()
-
+   void ping()
 }
