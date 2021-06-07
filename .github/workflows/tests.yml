@@ -49,7 +49,7 @@ jobs:
       - name: Run tests
         run: |
           echo $PATH
-          thrift --help
+          ls -al ${HOME}/install/*
           thrift --gen py calculator.thrift
 
 
