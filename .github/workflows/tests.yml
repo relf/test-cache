@@ -18,7 +18,7 @@ jobs:
         id: cache-thrift
         uses: actions/cache@v2
         with:
-          path: ${HOME}/install/bin/thrift
+          path: ${HOME}/install/bin
           key: ${{ runner.os }}-thrift-0.13.0-cache-v2
 
       - name: Make Thrift Compiler
